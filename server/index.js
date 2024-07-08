@@ -14,6 +14,7 @@ app.use(cors());
 
 io.on("connection", (socket) => {
   console.log("New connection");
+  console.log("connection initate");
 
   socket.on("joined", (data) => {
     users[socket.id] = data.user;
@@ -36,5 +37,7 @@ socket.on("message", function ({ message, id, user }) {
 });
 
 server.listen(port, () => {
+  
   console.log(`Server is running on port ${port}`);
 });
+
