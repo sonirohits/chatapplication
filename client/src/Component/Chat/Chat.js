@@ -6,7 +6,7 @@ import sendLogo from "../../Images/send.png";
 import Message from "../Message/message";
 import ReactScrollToBottom from 'react-scroll-to-bottom';
 import closeIcon from "../../Images/closeIcon.png"
-const ENDPOINT = "http://localhost:4500/";
+const ENDPOINT = "https://react-node-sockets-chat-rohit-soni.onrender.com";
 
 let socket;
 const Chat = () => {
