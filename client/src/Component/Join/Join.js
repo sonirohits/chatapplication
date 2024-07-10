@@ -12,7 +12,7 @@ const Join = () => {
   return (
     <div className='JoinPage'>
       <div className='JoinContainer'>
-        <img src={logo}></img>
+        <img src={logo} alt='logo'></img>
         <h1>CHAT APP</h1>
         <input type='text' id='JoinInput' placeholder='Enter Your Name'
         onChange={function(e){

@@ -83,7 +83,7 @@ const Chat = () => {
         </ReactScrollToBottom >
         <div className='inputBox'>
          <input type='text' id='chatInput'></input>
-         <button className='sendBtn' onClick={send}><img src={sendLogo}></img></button>
+         <button className='sendBtn' onClick={send}><img src={sendLogo} alt='close'></img></button>
         </div>
       </div>
 
