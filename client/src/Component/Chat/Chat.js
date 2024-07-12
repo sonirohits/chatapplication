@@ -16,7 +16,7 @@ const Chat = () => {
    const send =function(){
    const message= document.getElementById('chatInput').value;
     socket.emit('message',{message,id,user});
-    document.getElementById('chatInput').value ="";
+    document.getElementById('chatInput').value="";
    }
   useEffect(() => {
 

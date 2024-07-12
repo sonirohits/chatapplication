@@ -11,7 +11,7 @@ const server = http.createServer(app);
 const users = [];
 
 app.use(cors());
-const io = socketIo(server, {
+const io = socketIO(server, {
   cors: {
       origin: '*',
   }
