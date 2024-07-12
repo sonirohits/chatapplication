@@ -13,7 +13,7 @@ const users = [];
 app.use(cors());
 const io = socketIO(server, {
   cors: {
-      origin: '*',
+    origin: '*',
   }
 });
 io.on("connection", (socket) => {
@@ -26,20 +26,20 @@ io.on("connection", (socket) => {
     socket.broadcast.emit('userJoined', { user: 'Admin', message: `${users[socket.id]} has joined` });
     socket.emit("welcome", { user: "Admin", message: `Welcome to the chat ${users[socket.id]}` });
   });
-  
-  socket.on("disconnect",function(){
-    socket.broadcast.emit("leave",{user:"Admin",message:`${users[socket.id]} has left`});
+
+  socket.on("disconnect", function () {
+    socket.broadcast.emit("leave", { user: "Admin", message: `${users[socket.id]} has left` });
     console.log(`user left`);
   });
 
-socket.on("message", function ({ message, id, user }) {
-  io.emit('sendMessage', { user: users[socket.id], message, id: socket.id });
-});
- 
+  socket.on("message", function ({ message, id, user }) {
+    io.emit('sendMessage', { user: users[socket.id], message, id: socket.id });
+  });
+
 });
 
 server.listen(port, () => {
-  
+
   console.log(`Server is running on port ${port}`);
 });
 
