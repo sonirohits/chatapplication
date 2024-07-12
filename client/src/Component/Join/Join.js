@@ -17,6 +17,7 @@ const Join = () => {
         <input type='text' id='JoinInput' placeholder='Enter Your Name'
         onChange={function(e){
           setname(e.target.value);
+          console.log("the  name is",e.target.value);
         }}></input>
         <Link  onClick={ 
            function(event){ 

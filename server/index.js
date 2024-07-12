@@ -6,12 +6,16 @@ const socketIO = require("socket.io");
 const app = express();
 const port = process.env.PORT || 4500;
 const server = http.createServer(app);
-const io = socketIO(server);
+//const io = socketIO(server);
 
 const users = [];
 
 app.use(cors());
-
+const io = socketIo(server, {
+  cors: {
+      origin: '*',
+  }
+});
 io.on("connection", (socket) => {
   console.log("New connection");
   console.log("connection initate");
@@ -27,9 +31,7 @@ io.on("connection", (socket) => {
     socket.broadcast.emit("leave",{user:"Admin",message:`${users[socket.id]} has left`});
     console.log(`user left`);
   });
-//   socket.on("message",function({message,id}){
-//  io.emit('sendMessage',{user:users[id],message,id});
-//   });
+
 socket.on("message", function ({ message, id, user }) {
   io.emit('sendMessage', { user: users[socket.id], message, id: socket.id });
 });

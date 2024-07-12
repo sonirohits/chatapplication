@@ -12,6 +12,7 @@ let socket;
 const Chat = () => {
   const [id, setid] = useState("")
   const[messages,setMessages] =useState([]);
+
    const send =function(){
    const message= document.getElementById('chatInput').value;
     socket.emit('message',{message,id,user});
@@ -19,7 +20,7 @@ const Chat = () => {
    }
   useEffect(() => {
 
-     socket = socketIo(ENDPOINT, { transports: ['websocket'] });
+     socket = socketIo.connect(ENDPOINT, { transports: ['websocket'] });
   
     // Event listeners and emit events should be inside useEffect
     socket.on("connect", () => {
@@ -32,6 +33,7 @@ const Chat = () => {
   
     socket.on("welcome", (data) => {
       setMessages((prevMessages) => [...prevMessages, data]);
+      console.log("the message array is",messages);
       console.log(data.user);
       console.log(data.message);
     });
@@ -39,20 +41,24 @@ const Chat = () => {
     socket.on('userJoined', (data) => {
       setMessages((prevMessages) => [...prevMessages, data]);
       console.log( data.message);
+      console.log("the message array is",messages);
     });
     socket.on("leave",function(data){
       setMessages((prevMessages) => [...prevMessages, data]);
       console.log(data.user,data.message);
+      console.log("the message array is",messages);
     })
   
     // Clean up the socket on component unmount
     return () => {
-     socket.disconnect();
+     socket.disconnect(); ///  this line indicates that client is leaving the chat
       socket.off();
+      console.log("the message array is",messages);
     };
   }, []);  // Empty dependency array ensures this runs only once on mount
   
   useEffect(() => {
+    //called when first time it is render on DOM
    socket.on('sendMessage',function(data){
     setMessages((prevMessages) => [...prevMessages, data]);
     console.log(data);
@@ -60,6 +66,7 @@ const Chat = () => {
    })
   
     return () => {
+      //called  when elem remove from the DOM
      socket.off();
     }
   }, [])
